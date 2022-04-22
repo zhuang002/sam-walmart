@@ -33,7 +33,9 @@ def sprint_category(category, level):
     s_ret = "<div>"
     for i in range(level):
         s_ret += "&nbsp;&nbsp;&nbsp;"
-    s_ret += "<a>" + str(category['id']) + ":" + category['name'] + "</a><br>"
+    s_ret += "<a>" + str(category['id']) + ":" + category['name'] + "</a>"\
+        +"&nbsp; &nbsp; <a href='/api/category/delete/"+str(category['id'])+"'>delete</a>"\
+        +"&nbsp; <a href='/api/category/break/"+str(category['id'])+"'>break</a><br>"
     for sub in category['children']:
         s_ret += sprint_category(sub, level + 1)
     s_ret += "</div>"
@@ -47,7 +49,6 @@ def get_categories_json():
 
 @app.route('/api/category/add', methods=['GET', 'POST'])
 def add_category():
-    categories = {}
     cnx = mysql.connector.connect(user='walmart', database='walmart', password='walmart')
     curs = cnx.cursor(buffered=True)
     curs.execute("insert into categories (name, description, link) values ('{}','{}','{}')".format(
@@ -59,7 +60,6 @@ def add_category():
 
 @app.route('/api/category/set_relation', methods=['GET', 'POST'])
 def add_set_relation():
-    categories = {}
     cnx = mysql.connector.connect(user='walmart', database='walmart', password='walmart')
     curs = cnx.cursor(buffered=True)
     curs.execute("insert into categoryrelation (parent, child) values ({},{})".format(
@@ -68,6 +68,23 @@ def add_set_relation():
     cnx.commit()
     return redirect('/backend/categories')
 
+
+@app.route('/api/category/delete/<int:cat_id>')
+def delete_category(cat_id: int):
+    cnx = mysql.connector.connect(user='walmart', database='walmart', password='walmart')
+    curs = cnx.cursor(buffered=True)
+    curs.execute("delete from categories where id={}".format(cat_id))
+    curs.execute("delete from categoryrelation where parent={id} or child={id}".format(id=cat_id))
+    cnx.commit()
+    return redirect('/backend/categories')
+
+@app.route('/api/category/break/<int:cat_id>')
+def break_cat_relation(cat_id:int):
+    cnx = mysql.connector.connect(user='walmart', database='walmart', password='walmart')
+    curs = cnx.cursor(buffered=True)
+    curs.execute("delete from categoryrelation where child={}".format(cat_id))
+    cnx.commit()
+    return redirect('/backend/categories')
 
 if __name__ == '__main__':
     app.run(debug=True)
