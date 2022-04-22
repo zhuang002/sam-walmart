@@ -1,0 +1,77 @@
+<html>
+<header>
+    <script src="https://kit.fontawesome.com/1e8497a099.js" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/departments.js')}}"></script>
+    <script src="{{url_for('static', filename='js/textPicture.js')}}"></script>
+    <script src="{{url_for('static', filename='js/segment.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/segment.css') }}">
+</header>
+
+<body onload="renderHomeContent(document.getElementById('content'))">
+    <div style="padding-left:30px;padding-right:10%;padding-top:40px;">
+        <div id="search_banner">
+            <table>
+                <tr>
+                    <td><img src="{{ url_for('static', filename='img/logo.png') }}" style="height:40" /></td>
+                    <td><input type="text" style="border:2px blue solid; width:600px;height:36px;">
+
+                    </td>
+                    <td><img src="{{ url_for('static', filename='img/search.png') }}" style="height:40" /></td>
+                </tr>
+            </table>
+        </div>
+
+    <div id="menubar" class="menubar">
+        <table cellspacing="0">
+            <tr>
+                <td><button onclick="toggleSitemap()">Departments <i class="fa fa-thin fa-angle-up"></i></button></td>
+                <td><a>Patio</a></td>
+                <td><a>Multisaves</a></td>
+                <td><a>Electronics</a></td>
+                <td><a>Clothing</a></td>
+                <td><a>Deals</a></td>
+                <td style="width:100%"></td>
+                <td><a>Shop grocery</a></td>
+                <td><a>Store finder</a></td>
+                <td><a>Flyers</a></td>
+                <td><a>Signin My Account <i class="fa fa-angle-down"></i></a></td>
+                <td><a><i class="fa fa-cart-shopping"></i></a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="popup_sitemap" class="popup_sitemap" style="display:none">
+        <p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
+    </div>
+    <div id="content">
+    </div>
+</div>
+</body>
+<script language="javascript">
+    function renderHomeContent(root) {
+        for (var i = 0; i < sections.length; i++) {
+            seg = new Segment(sections[i]);
+            root.appendChild(seg.getRoot())
+        }
+
+    }
+
+    var showSitemap=false;
+    function toggleSitemap() {
+        if (showSitemap) {
+            document.getElementById("popup_sitemap").style.display="none";
+            showSitemap=false;
+        } else {
+            document.getElementById("popup_sitemap").style.display="";
+            showSitemap=true;
+        }
+    }
+</script>
+
+</html>

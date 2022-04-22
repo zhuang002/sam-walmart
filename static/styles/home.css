@@ -1,0 +1,43 @@
+.menubar {
+  padding-top: 20px;
+  font-family: sans-serif;
+}
+
+.menubar button {
+  background-color: #638de7;
+  color: white;
+  font-size: 24;
+  border-radius: 5px;
+  padding: 10px;
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.menubar td {
+  text-align: center;
+  vertical-align: middle;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.menubar a {
+  font-size: 14px;
+  color: #638de7;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.menubar a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.popup_sitemap {
+    border: 1px cornflowerblue solid;
+    width: 80%;
+    height:400px;
+    border-radius:5px;
+    position:absolute;
+    z-index = 10;
+    background-color:white;
+}

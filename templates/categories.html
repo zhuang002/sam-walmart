@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+</head>
+<body>
+    <h1>Categories</h1>
+    <div id="category_tree">
+        {{data|safe}}
+    </div>
+    <button id="btn_add" onclick="form_add.style.display=''; this.style.display='none';btn_set.style.display='none'">
+        Add New Category
+    </button>&nbsp;&nbsp;&nbsp;
+    <button id="btn_set" onclick="form_set.style.display=''; this.style.display='none';btn_add.style.display='none'">
+        Set Category Relationship
+    </button>
+    <form id="form_add" style="display:none" action="/api/category/add" method="post">
+        <table cellspacing="0" border="0">
+            <tr>
+                <td>name</td>
+                <td><input name="cat_name" type="text"></td>
+            </tr>
+            <tr>
+                <td>description</td>
+                <td><input name="cat_desc" type="text"></td>
+            </tr>
+            <tr>
+                <td>link</td>
+                <td><input name="cat_link" type="text"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Add">
+    </form>
+    <form id="form_set" style="display:none" action="/api/category/set_relation" method="post">
+        <a>Parent Id: </a> <input name="parent_id" type="text"> &nbsp;&nbsp;&nbsp;&nbsp;
+        <a>child id: </a><input name="child_id" type="text"><br>
+        <input type="submit" value="Set">
+    </form>
+</body>
+</html>
